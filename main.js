@@ -183,7 +183,7 @@ try {
 
     // Skills items (if any)
    
-
+    
     // Footer
    
   }
@@ -223,7 +223,13 @@ try {
   // ------------------------------
   // SKILLS & PROGRESS BARS
   // ------------------------------
-
+  if (skillItems.length) {
+    skillItems.forEach(item => {
+      const level = item.getAttribute("data-skill") || "0";
+      const bar = item.querySelector(".progress div");
+      if (bar) setTimeout(() => bar.style.width = level + "%", 300);
+    });
+  }
   if (skillButtons.length) {
     skillButtons.forEach(btn => {
       btn.addEventListener("click", () => {
