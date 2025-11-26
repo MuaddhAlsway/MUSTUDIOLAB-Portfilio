@@ -182,32 +182,10 @@ try {
     });
 
     // Skills items (if any)
-    gsap.utils.toArray(".skill-item").forEach(item => {
-      gsap.from(item, {
-        opacity: 0,
-        y: 30,
-        duration: 0.7,
-        scrollTrigger: {
-          trigger: item,
-          start: "top 90%",
-          toggleActions: "play reverse play reverse"
-        }
-      });
-    });
+   
 
     // Footer
-    if ($("footer")) {
-      gsap.from("footer", {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: "footer",
-          start: "top 90%",
-          toggleActions: "play reverse play reverse"
-        }
-      });
-    }
+   
   }
 } catch (e) {
   console.warn("GSAP not available:", e);
@@ -245,13 +223,7 @@ try {
   // ------------------------------
   // SKILLS & PROGRESS BARS
   // ------------------------------
-  if (skillItems.length) {
-    skillItems.forEach(item => {
-      const level = item.getAttribute("data-skill") || "0";
-      const bar = item.querySelector(".progress div");
-      if (bar) setTimeout(() => bar.style.width = level + "%", 300);
-    });
-  }
+
   if (skillButtons.length) {
     skillButtons.forEach(btn => {
       btn.addEventListener("click", () => {

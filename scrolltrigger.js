@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const scrollElements = document.querySelectorAll(".pricing-section, .contact-section, .site-footer");
+  const scrollElements = document.querySelectorAll(", .site-footer");
 
   const observer = new IntersectionObserver(
     (entries) => {
