@@ -419,3 +419,56 @@ if (header && whatsappIcon) {
 // If you include any scroll-based logic AFTER DOMContentLoaded (outside),
 // keep it minimal. Prefer using the central handler above.
 // ------------------------------
+function updateCourseDurations() {
+  const cards = document.querySelectorAll('.course-card');
+
+  cards.forEach(card => {
+    const startEl = card.querySelectorAll('.time-item .value')[0];
+    const endEl = card.querySelectorAll('.time-item .value')[1];
+
+    const totalPeriodEl = card.querySelector('.total-period');
+    const durationSoFarEl = card.querySelector('.duration-sofar');
+
+    if (!startEl || !endEl) return;
+
+    const startDate = new Date(startEl.textContent);
+    const endDate = new Date(endEl.textContent);
+    const today = new Date();
+
+    // Total Period (Start → End)
+    let totalY = endDate.getFullYear() - startDate.getFullYear();
+    let totalM = endDate.getMonth() - startDate.getMonth();
+    let totalD = endDate.getDate() - startDate.getDate();
+    if(totalD < 0){
+      totalM--;
+      totalD += new Date(endDate.getFullYear(), endDate.getMonth(), 0).getDate();
+    }
+    if(totalM < 0){
+      totalY--;
+      totalM += 12;
+    }
+    totalPeriodEl.textContent = `${totalY}y ${totalM}m ${totalD}d`;
+
+    // Duration so far (End → Today)
+    let durY = today.getFullYear() - endDate.getFullYear();
+    let durM = today.getMonth() - endDate.getMonth();
+    let durD = today.getDate() - endDate.getDate();
+    if(durD < 0){
+      durM--;
+      durD += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    }
+    if(durM < 0){
+      durY--;
+      durM += 12;
+    }
+    // If today is before end date → show 0
+    if(today < endDate){
+      durY = 0; durM = 0; durD = 0;
+    }
+
+    durationSoFarEl.textContent = `${durY}y ${durM}m ${durD}d`;
+  });
+}
+
+// Run update
+updateCourseDurations();
